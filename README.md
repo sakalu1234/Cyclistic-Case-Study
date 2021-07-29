@@ -1,17 +1,29 @@
-So, I have been working on the Google Data Analytics Professional Certificate course in Coursera and I have finished all of the courses, except the last one.
-In the final course, they suggest creating a portfolio to showcase the ability and the understanding of how data analytics work in real life. They give study cases to us to do and include it in our portfolio when we are finished. 
+   I have been working on the Google Data Analytics Professional Certificate course in Coursera and basically, I have finished all of the courses, except the last one.
 
-So, I chose to pick Cyclistic, a fictional company based in Chicago. In this case study, I work as a junior data analyst in the marketing team of Cyclistic. The top managers think member riders are much more profitable, so they want to find a way to convert casual riders to member riders. My job for this case is to gain insights and identify the trend from the provided data to help our marketing team to deploy their marketing strategy.
 
-First, I downloaded all the 15 historical data files, 2020/4 -2021/05, from the company cloud server. Because it contains over 4 million rows of data, Excel is not going to be the ideal tool to clean the data unless I do it file by file and is going to take a while.  
+   In the final course, they suggest creating a portfolio to showcase the ability and the understanding of how data analytics work in real life. They give study cases to us to do and include it in our portfolio when we are finished.
+****************************************************************************************************************
 
-Instead of doing it on my laptop, I used Google Bigquery,a fully-managed, serverless data warehouse that enables scalable analysis over petabytes of data to combine and clean the data. 
+**Project Introduction**
 
-**I first megered all the 15 files by uisng union all function.**
 
-************************
+   I work as a junior data analyst in the marketing team of Cyclistic, a fictional bike-sharing company based in Chicago. The executives want to develop a marketing strategy which convert the casual riders to member riders, since member riders are more profitable. My job for this project is to identify the behavior of how casual riders and member act differently when they use our bike-sharing service and then share the information to the marketing team to develop a proper campaign to covert casual riders to member riders.
+************************************************************************************
 
-![Merge](https://user-images.githubusercontent.com/63176613/127413315-b5ce9a60-5501-4c44-87d1-9dd7947cff83.png)
+**Collecting data**
+
+
+   I downloaded all the 15 historical data files, 2020/4 -2021/05, from the company cloud server. All the historical data is in comma-delimited format with 15 columns, ride ID #, ride type, start/end time, ride length (in minutes), day of the week, starting point (code, name, and latitude/longitude), ending point (code, name, and latitude/longitude), and member/casual rider.
+
+
+   Because this data is stored in the company server, I am going to assume the data is reliable.
+
+********************************************************************************
+**Process** 
+
+
+Since it contains over 4 million rows of data, in this case, Excel will not be an ideal tool to use.  I will be using Bigquery to manipulate the data, a fully-managed, serverless data warehouse that enables scalable analysis over petabytes of data to combine and clean the data. 
+The code below will merger all the data into one, once I uploaded and imported the data in Bigquery.
 
 with all_data as (
 SELECT * EXCEPT (start_station_id, end_station_id) FROM `prefab-faculty-251001.bike_share.2020_04` 
@@ -40,19 +52,66 @@ SELECT* EXCEPT (start_station_id,end_station_id) FROM `prefab-faculty-251001.bik
 union all
 SELECT * EXCEPT (start_station_id,end_station_id) FROM `prefab-faculty-251001.bike_share.2021_04` 
 union all
-SELECT* EXCEPT (start_station_id,end_station_id) FROM `prefab-faculty-251001.bike_share.2021_05`), 
-************
+SELECT* EXCEPT (start_station_id,end_station_id) FROM `prefab-faculty-251001.bike_share.2021_05`),
+********************************************************************************
+**Cleaning**
 
-**Then I calculated the ride_lenghth_time and the day of week.**
 
-********************
+****Some of the data is wrong, like the end_time is small than the start_time. So I decided to delete the data.
 
-![agg_data](https://user-images.githubusercontent.com/63176613/127413327-3364cb46-ad65-454f-9871-f79ac9f7e176.png)
+
+DELETE FROM `prefab-faculty-251001.bike_share.2020_04` WHERE end_time < start_time;
+DELETE FROM `prefab-faculty-251001.bike_share.2020_05` WHERE end_time < start_time;
+DELETE FROM `prefab-faculty-251001.bike_share.2020_06` WHERE end_time < start_time;
+DELETE FROM `prefab-faculty-251001.bike_share.2020_07` WHERE end_time < start_time;
+DELETE FROM `prefab-faculty-251001.bike_share.2020_08` WHERE end_time < start_time;
+DELETE FROM `prefab-faculty-251001.bike_share.2020_09` WHERE end_time < start_time;
+DELETE FROM `prefab-faculty-251001.bike_share.2020_10` WHERE end_time < start_time;
+DELETE FROM `prefab-faculty-251001.bike_share.2020_11` WHERE end_time < start_time;
+DELETE FROM `prefab-faculty-251001.bike_share.2020_12` WHERE end_time < start_time;
+DELETE FROM `prefab-faculty-251001.bike_share.2021_01` WHERE end_time < start_time;
+DELETE FROM `prefab-faculty-251001.bike_share.2021_02` WHERE end_time < start_time;
+DELETE FROM `prefab-faculty-251001.bike_share.2021_03` WHERE end_time < start_time;
+DELETE FROM `prefab-faculty-251001.bike_share.2021_04` WHERE end_time < start_time;
+DELETE FROM `prefab-faculty-251001.bike_share.2021_05` WHERE end_time < start_time;
+
+
+
+****In some start_station_name and end_station_name contain irregular symbol and text, so I decided to remove it and I also to modified the latitude and longitude coordinates to match each stations. 
+
+
+
+
+clean_station_longlag AS(
+SELECT
+ride_id,
+start_lat,
+start_lng,
+end_lat,
+end_lng,
+TRIM(REPLACE(start_station_name, '(*)', '')) start_station_name, #delete station name with * sight
+TRIM(REPLACE(end_station_name, '(*)', '')) end_station_name
+FROM (
+SELECT
+ride_id,
+round(start_lat,6) as start_lat,#modify latitude 
+round(start_lng,6) as start_lng,#modify longitude 
+round(end_lat,6) as end_lat,
+round(end_lng,6) as end_lng,
+TRIM(REPLACE(start_station_name, '(Temp)', '')) start_station_name,#delete station name with Temp
+TRIM(REPLACE(end_station_name, '(Temp)', '')) end_station_name
+FROM
+agg_data )),
+
+
+
+****Then I calculated the ride_lenghth_time and the day of week. By knowing how long do they ride can help us to know our customers’ behavior better.
+
 
 agg_data as (
 SELECT
-    *,
-    TIMESTAMP_DIFF(ended_at, started_at, MINUTE) AS ride_length_minute, #calculat the time between end and start, and I have been used another table to delete rows where start_time > end_time.
+*,
+TIMESTAMP_DIFF(ended_at, started_at, MINUTE) AS ride_length_minute, #calculat the time between end and start, and I have been used another table to delete rows where start_time > end_time.
     CASE
       WHEN EXTRACT(DAYOFWEEK FROM started_at) = 1 THEN 'Sunday'    
       WHEN EXTRACT(DAYOFWEEK
@@ -72,62 +131,57 @@ SELECT
     AS day_of_week
   FROM
     all_data),
-    
-****************************************************    
-**I found there were some station name contains irregular symbol or text like Wood St & Taylor St (Temp). So I decide to remove it, in case it causes duplication. I modified the latitude and longitude coordinates to match each station’s coordinates**
 
-************************
+****************************************************************************************************************
+**Analyze**
 
-![Clean_station name](https://user-images.githubusercontent.com/63176613/127413336-85076efa-4c77-449d-987e-9b2573b5dbba.png)
+After I rechecked several time on the cleaning process, I finally can start to analyze the data to identify reasons for the different behaviors of casual riders and member riders.
+Since Bigquery does not provide any data visualization, I decided to use Tableau software to visualize the data.
 
-  clean_station_longlag AS(
-  SELECT
-  ride_id,
-  start_lat,
-  start_lng,
-  end_lat,
-  end_lng,
-  TRIM(REPLACE(start_station_name, '(*)', '')) start_station_name, #delete station name with * sight
-  TRIM(REPLACE(end_station_name, '(*)', '')) end_station_name
-  FROM (
-    SELECT
-  ride_id,
-  round(start_lat,6) as start_lat,#modify latitude 
-  round(start_lng,6) as start_lng,#modify longitude 
-  round(end_lat,6) as end_lat,
-  round(end_lng,6) as end_lng,
-  TRIM(REPLACE(start_station_name, '(Temp)', '')) start_station_name,#delete station name with Temp
-  TRIM(REPLACE(end_station_name, '(Temp)', '')) end_station_name
-  FROM
-    agg_data )),
+1. We can see it from here that casual riders prefer to ride longer than member riders. For both riders, the peak occurs on Saturday and Sunday.
+ 
+	However, compared to member riders, the average time for casual riders is more fluctuant. I assumed that most member riders use our bike-sharing service to commute on regular basis and most casual riders use it for leisure purposes and these people could be visitors.
+
+	
+ ![1](https://user-images.githubusercontent.com/63176613/127579623-b6265f55-2e1a-49c9-9f71-1dfd27ff6a2c.png)
+ 
+	These two pictures confirm the theory. Casual riders are concentrated on the North Side community area of Chicago but member riders are more scattered throughout the city.
+
+	![2](https://user-images.githubusercontent.com/63176613/127579688-aca72d1b-6466-4c58-bd24-be380de73faf.png)
+
+	Figure 2 Casual Riders on workday
+	![3](https://user-images.githubusercontent.com/63176613/127579691-783eef27-b072-46e2-962f-39cd865da752.png)
+	Figure 3 Member Riders
+ 
+ 
+ 
+ 
+
+2. Regardless of both member riders and casual riders, the usage of bike-sharing service reaches to the peak in 5:00 PM during workday.
+ ![Picture4](https://user-images.githubusercontent.com/63176613/127579794-c72ccf81-b9b0-41d2-bcbd-5f6c48294c8b.png)	
+
+But in weekend, the peak is 3 hours ealier, 2:00 PM
+ 
+![Picture5](https://user-images.githubusercontent.com/63176613/127579862-acbfb851-83c1-4fb3-827a-64f28c06498a.png)
+
+
+
+Bike-sharing service usage increase in May, ends in August. May to August will be a good time to have advertisement. 
+ ![Picture6](https://user-images.githubusercontent.com/63176613/127579895-6696ddbf-05fd-463d-94c3-1ba02464a9f6.png)
+
+
+This is bike usage in January and the tuning point of bike starts on 27. But we do not have any further data in January, but still the marketing team can use it as a reference for the future.
+ 
+![Picture7](https://user-images.githubusercontent.com/63176613/127579902-c8001509-6402-4153-a480-b0d016508962.png)
+
+
+
 ****************************************************
+**Recommendation**
+	The purpose of marketing campaign is to convert and reaches to potential member riders. Based on the insights I gained from the data, here is what I recommend.
 
-**Last, I just joined the clean data together**
-
-************************
-![last](https://user-images.githubusercontent.com/63176613/127413452-7e2d4a50-6743-4b42-ba14-a18151675cf0.png)
-
-  clean_data as (
-  SELECT
-    ad.ride_id,   #Trying to find a way not typing so many, but i failed
-    ad.rideable_type,
-    ad.started_at,
-    ad.ended_at,
-    cl.start_station_name,
-    cl.end_station_name,
-    cl.start_lat,
-    cl.start_lng,
-    cl.end_lat,
-    cl.end_lng,
-    ad.member_casual,
-    ad.ride_length_minute,
-    ad.day_of_week
-  FROM
-    agg_data ad
-  LEFT JOIN  #Join agg_data and clean_station_longlag together
-    clean_station_longlag cl
-  ON
-    ad.ride_id = cl.ride_id)
-************************************************
-
-************************************************
+1.	Most of the casual riders may be tourists. I recommend developing weekly membership for tourists. 
+2.	Considering students’ summer holiday, the best period to have advertisement is in between May and August. 
+3.	Casual riders are concentrated in Streeterville, a neighborhood in the Near North Side. Therefore, to have ads there can convert and get maximum reach for casual riders.
+4.	Create different ad schedule can save money and have the maximum return. On weekends, the usage of bike reaches to the peak at 2:00 PM. Therefore, to have campaign from 1:00 PM to 3 PM will be ideal and workday is from 4:00 PM – 6:00 PM.
+5.	The usage of bike is heavily related to the weather, California would be a good state if we want to expand the market.
