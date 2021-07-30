@@ -172,7 +172,7 @@ Bike-sharing service usage increase in May, ends in August. May to August will b
  ![Picture6](https://user-images.githubusercontent.com/63176613/127579895-6696ddbf-05fd-463d-94c3-1ba02464a9f6.png)
 
 
-This is bike usage in January and the tuning point of bike starts on 27. But we do not have any further data in January, but still the marketing team can use it as a reference for the future.
+This is bike usage in January and the tuning point starts on 27. But we do not have any further data in January, but still the marketing team can use it as a reference for the future.
  
 ![Picture7](https://user-images.githubusercontent.com/63176613/127579902-c8001509-6402-4153-a480-b0d016508962.png)
 
