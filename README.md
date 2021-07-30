@@ -87,7 +87,7 @@ The code below will merger all the data into one, once I uploaded and imported t
 
 
 
-	**clean_station_longlag AS(
+	clean_station_longlag AS(
 	SELECT
 	ride_id,
 	start_lat,
@@ -107,13 +107,12 @@ The code below will merger all the data into one, once I uploaded and imported t
 	TRIM(REPLACE(end_station_name, '(Temp)', '')) end_station_name
 	FROM
 	agg_data )),
-	**
+
 
 
 ****Then I calculated the ride_lenghth_time and the day of week. By knowing how long do they ride can help us to know our customers’ behavior better.
 
-
-	**agg_data as (
+	agg_data as (
 	SELECT
 	*,
 	TIMESTAMP_DIFF(ended_at, started_at, MINUTE) AS ride_length_minute, #calculat the time between end and start, and I have been used another table to delete rows where start_time > end_time.
@@ -135,7 +134,7 @@ The code below will merger all the data into one, once I uploaded and imported t
 	  END
 	    AS day_of_week
 	  FROM
-	    all_data),**
+	    all_data),
 
 ****************************************************************************************************************
 **Analyze**
