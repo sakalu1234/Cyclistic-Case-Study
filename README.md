@@ -1,10 +1,4 @@
   						**Cyclistic-Case-Study **
-   
- I have been working on the Google Data Analytics Professional Certificate course in Coursera and basically, I have finished all of the courses, except the last one.
-
-
-   In the final course, they suggest creating a portfolio to showcase the ability and the understanding of how data analytics work in real life. They give study cases to us to do and include it in our portfolio when we are finished.**
-****************************************************************************************************************
 
 **Project Introduction**
 
