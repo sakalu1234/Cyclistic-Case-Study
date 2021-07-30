@@ -30,7 +30,7 @@ In the final course, they suggest creating a portfolio to showcase the ability a
 Since it contains over 4 million rows of data, in this case, Excel will not be an ideal tool to use.  I will be using Bigquery to manipulate the data, a fully-managed, serverless data warehouse that enables scalable analysis over petabytes of data to combine and clean the data. 
 The code below will merger all the data into one, once I uploaded and imported the data in Bigquery.
 
-	**with all_data as (
+	with all_data as (
 	SELECT * EXCEPT (start_station_id, end_station_id) FROM `prefab-faculty-251001.bike_share.2020_04` 
 	union all
 	SELECT * EXCEPT (start_station_id,end_station_id) FROM `prefab-faculty-251001.bike_share.2020_05` 
@@ -57,7 +57,7 @@ The code below will merger all the data into one, once I uploaded and imported t
 	union all
 	SELECT * EXCEPT (start_station_id,end_station_id) FROM `prefab-faculty-251001.bike_share.2021_04` 
 	union all
-	SELECT* EXCEPT (start_station_id,end_station_id) FROM `prefab-faculty-251001.bike_share.2021_05`),**
+	SELECT* EXCEPT (start_station_id,end_station_id) FROM `prefab-faculty-251001.bike_share.2021_05`),
 ********************************************************************************
 **Cleaning**
 
@@ -65,7 +65,7 @@ The code below will merger all the data into one, once I uploaded and imported t
 ****Some of the data is wrong, like the end_time is small than the start_time. So I decided to delete the data.
 
 
-	**DELETE FROM `prefab-faculty-251001.bike_share.2020_04` WHERE end_time < start_time;
+	DELETE FROM `prefab-faculty-251001.bike_share.2020_04` WHERE end_time < start_time;
 	DELETE FROM `prefab-faculty-251001.bike_share.2020_05` WHERE end_time < start_time;
 	DELETE FROM `prefab-faculty-251001.bike_share.2020_06` WHERE end_time < start_time;
 	DELETE FROM `prefab-faculty-251001.bike_share.2020_07` WHERE end_time < start_time;
@@ -78,7 +78,7 @@ The code below will merger all the data into one, once I uploaded and imported t
 	DELETE FROM `prefab-faculty-251001.bike_share.2021_02` WHERE end_time < start_time;
 	DELETE FROM `prefab-faculty-251001.bike_share.2021_03` WHERE end_time < start_time;
 	DELETE FROM `prefab-faculty-251001.bike_share.2021_04` WHERE end_time < start_time;
-	DELETE FROM `prefab-faculty-251001.bike_share.2021_05` WHERE end_time < start_time;**	
+	DELETE FROM `prefab-faculty-251001.bike_share.2021_05` WHERE end_time < start_time;	
 
 
 
