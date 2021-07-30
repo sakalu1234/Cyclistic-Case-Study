@@ -147,13 +147,13 @@ Since Bigquery does not provide any data visualization, I decided to use Tableau
 	
  ![1](https://user-images.githubusercontent.com/63176613/127579623-b6265f55-2e1a-49c9-9f71-1dfd27ff6a2c.png)
  
-These two pictures confirm the theory. Casual riders are concentrated on the North Side community area of Chicago but member riders are more scattered throughout the city.
+Figure 2 and Figure 3 confirm the theory. Casual riders are concentrated on the North Side community area of Chicago but member riders are more scattered throughout the city.
 
 ![2](https://user-images.githubusercontent.com/63176613/127579688-aca72d1b-6466-4c58-bd24-be380de73faf.png)
 
 Figure 2 Casual Riders on workday
 ![3](https://user-images.githubusercontent.com/63176613/127579691-783eef27-b072-46e2-962f-39cd865da752.png)
-	Figure 3 Member Riders
+	Figure 3 Member Riders on workday
  
  
  
