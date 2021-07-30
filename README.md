@@ -12,7 +12,8 @@ In the final course, they suggest creating a portfolio to showcase the ability a
 **Project Introduction**
 
 
-   I work as a junior data analyst in the marketing team of Cyclistic, a fictional bike-sharing company based in Chicago. The executives want to develop a marketing strategy which convert the casual riders to member riders, since member riders are more profitable. My job for this project is to identify the behavior of how casual riders and member act differently when they use our bike-sharing service and then share the information to the marketing team to develop a proper campaign to covert casual riders to member riders.
+	I work as a junior data analyst in the marketing team of Cyclistic, a fictional bike-sharing company based in Chicago. The executives want to develop a marketing strategy that converts casual riders to member riders since member riders are more profitable. My job for this project is to identify how casual riders and members act differently when they use our bike-sharing service and then share the information with the marketing team to develop a proper campaign to convert casual riders to member riders.
+
 ************************************************************************************
 
 **Collecting data**
@@ -28,7 +29,7 @@ In the final course, they suggest creating a portfolio to showcase the ability a
 
 
 Since it contains over 4 million rows of data, in this case, Excel will not be an ideal tool to use.  I will be using Bigquery to manipulate the data, a fully-managed, serverless data warehouse that enables scalable analysis over petabytes of data to combine and clean the data. 
-The code below will merger all the data into one, once I uploaded and imported the data in Bigquery.
+The code below merged all the data into one, once I uploaded and imported the data in Bigquery.
 
 	with all_data as (
 	SELECT * EXCEPT (start_station_id, end_station_id) FROM `prefab-faculty-251001.bike_share.2020_04` 
@@ -110,7 +111,7 @@ The code below will merger all the data into one, once I uploaded and imported t
 
 
 
-****Then I calculated the ride_lenghth_time and the day of week. By knowing how long do they ride can help us to know our customers’ behavior better.
+****Then I calculated the ride length time and the day of the week. By knowing how long do they ride can help us to know our customers’ behavior better.
 
 	agg_data as (
 	SELECT
@@ -139,17 +140,19 @@ The code below will merger all the data into one, once I uploaded and imported t
 ****************************************************************************************************************
 **Analyze**
 
-After I rechecked several time on the cleaning process, I finally started to analyze the data to identify reasons for the different behaviors of casual riders and member riders.
+After I rechecked several times on the cleaning process, I finally started to analyze the data to identify reasons for the different behaviors of casual riders and member riders.
 Since Bigquery does not provide any data visualization, I decided to use Tableau software to visualize the data.
 
-1. We can see it from here that casual riders prefer to ride longer than member riders. For both riders, the peak occurs on Saturday and Sunday.
+1. We can see from here that casual riders prefer to ride longer than member riders. For both riders, the peak occurs on Saturday and Sunday.
  
 	However, compared to member riders, the average time for casual riders is more fluctuant. I assumed that most member riders use our bike-sharing service to commute on regular basis and most casual riders use it for leisure purposes and these people could be visitors.
 
 	
  ![1](https://user-images.githubusercontent.com/63176613/127579623-b6265f55-2e1a-49c9-9f71-1dfd27ff6a2c.png)
  
+ 
 Figure 2 and Figure 3 confirm the theory. Casual riders are concentrated on the North Side community area of Chicago but member riders are more scattered throughout the city.
+
 
 ![2](https://user-images.githubusercontent.com/63176613/127579688-aca72d1b-6466-4c58-bd24-be380de73faf.png)
 
@@ -186,8 +189,8 @@ This is bike usage in January and the tuning point starts on 27. But we do not h
 
 The purpose of marketing campaign is to convert and reaches to potential member riders. Based on the insights I gained from the data, here is what I recommend.
 
-1.	Most of the casual riders may be tourists. I recommend developing weekly membership for tourists. 
-2.	Considering students’ summer holiday, the best period to have advertisement is in between May and August. 
+1.	Most of the casual riders maybe tourists. I recommend developing weekly membership for tourists. 
+2.	Considering students’ summer holiday and the peak usage, the best period to have advertisement is in between May and August. 
 3.	Casual riders are concentrated in Streeterville, a neighborhood in the Near North Side. Therefore, to have ads there can convert and get maximum reach for casual riders.
-4.	Create different ad schedule can save money and have the maximum return. On weekends, the usage of bike reaches to the peak at 2:00 PM. Therefore, to have campaign from 1:00 PM to 3 PM will be ideal and workday is from 4:00 PM – 6:00 PM.
+4.	Create different ad schedules can save money and have the maximum return. On weekends, the usage of bikes reaches the peak at 2:00 PM. Therefore, to have a campaign from 1:00 PM to 3 PM will be ideal and the workday is from 4:00 PM – 6:00 PM.
 5.	The usage of bike is heavily related to the weather, California would be a good state if we want to expand the market.
