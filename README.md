@@ -139,7 +139,7 @@ The code below will merger all the data into one, once I uploaded and imported t
 ****************************************************************************************************************
 **Analyze**
 
-After I rechecked several time on the cleaning process, I finally can start to analyze the data to identify reasons for the different behaviors of casual riders and member riders.
+After I rechecked several time on the cleaning process, I finally started to analyze the data to identify reasons for the different behaviors of casual riders and member riders.
 Since Bigquery does not provide any data visualization, I decided to use Tableau software to visualize the data.
 
 1. We can see it from here that casual riders prefer to ride longer than member riders. For both riders, the peak occurs on Saturday and Sunday.
