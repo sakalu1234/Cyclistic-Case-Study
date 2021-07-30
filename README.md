@@ -182,7 +182,7 @@ This is bike usage in January and the tuning point of bike starts on 27. But we 
 **Recommendation**
 
 
-	The purpose of marketing campaign is to convert and reaches to potential member riders. Based on the insights I gained from the data, here is what I recommend.
+The purpose of marketing campaign is to convert and reaches to potential member riders. Based on the insights I gained from the data, here is what I recommend.
 
 1.	Most of the casual riders may be tourists. I recommend developing weekly membership for tourists. 
 2.	Considering students’ summer holiday, the best period to have advertisement is in between May and August. 
