@@ -111,7 +111,7 @@ The code below merged all the data into one, once I uploaded and imported the da
 
 
 
-****Then I calculated the ride length time and the day of the week. By knowing how long do they ride can help us to know our customers’ behavior better.
+****Then I calculated the ride length time and the day of the week. By knowing how long both parties ride can help us to know our them better.
 
 	agg_data as (
 	SELECT
