@@ -12,7 +12,7 @@ In the final course, they suggest creating a portfolio to showcase the ability a
 **Project Introduction**
 
 
-	I work as a junior data analyst in the marketing team of Cyclistic, a fictional bike-sharing company based in Chicago. The executives want to develop a marketing strategy that converts casual riders to member riders since member riders are more profitable. My job for this project is to identify how casual riders and members act differently when they use our bike-sharing service and then share the information with the marketing team to develop a proper campaign to convert casual riders to member riders.
+I work as a junior data analyst in the marketing team of Cyclistic, a fictional bike-sharing company based in Chicago. The executives want to develop a marketing strategy that converts casual riders to member riders since member riders are more profitable. My job for this project is to identify how casual riders and members act differently when they use our bike-sharing service and then share the information with the marketing team to develop a proper campaign to convert casual riders to member riders.
 
 ************************************************************************************
 
