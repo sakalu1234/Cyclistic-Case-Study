@@ -29,7 +29,7 @@ I work as a junior data analyst in the marketing team of Cyclistic, a fictional 
 
 
 Since it contains over 4 million rows of data, in this case, Excel will not be an ideal tool to use.  I will be using Bigquery to manipulate the data, a fully-managed, serverless data warehouse that enables scalable analysis over petabytes of data to combine and clean the data. 
-The code below merged all the data into one, once I uploaded and imported the data in Bigquery.
+The code below merged all the data into one
 
 	with all_data as (
 	SELECT * EXCEPT (start_station_id, end_station_id) FROM `prefab-faculty-251001.bike_share.2020_04` 
