@@ -155,8 +155,9 @@ Figure 2 and Figure 3 confirm the theory. Casual riders are concentrated on the 
 
 
 ![2](https://user-images.githubusercontent.com/63176613/127579688-aca72d1b-6466-4c58-bd24-be380de73faf.png)
-
 Figure 2 Casual Riders on workday
+
+
 ![3](https://user-images.githubusercontent.com/63176613/127579691-783eef27-b072-46e2-962f-39cd865da752.png)
 	Figure 3 Member Riders on workday
  
