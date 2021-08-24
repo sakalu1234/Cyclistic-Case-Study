@@ -12,14 +12,15 @@ In the final course, they suggest creating a portfolio to showcase the ability a
 **Project Introduction**
 
 
-I work as a junior data analyst in the marketing team of Cyclistic, a fictional bike-sharing company based in Chicago. The executives want to develop a marketing strategy that converts casual riders to member riders since member riders are more profitable. My job for this project is to identify how casual riders and members act differently when they use our bike-sharing service and then share the information with the marketing team to develop a proper campaign to convert casual riders to member riders.
+I work as a junior data analyst in the marketing team of Cyclistic, a fictional bike-sharing company based in Chicago. The executives want to develop a marketing strategy that converts casual riders to member riders since member riders are more profitable. My job for this project is to identify how casual riders and members act differently when they use our bike-share service. From these insights, our team will design a new marketing strategy to convert casual riders into an annual member.
 
 ************************************************************************************
 
 **Collecting data**
 
 
-   I downloaded all the 15 historical data files, 2020/4 -2021/05, from the company cloud server. All the historical data is in comma-delimited format with 15 columns, ride ID #, ride type, start/end time, ride length (in minutes), day of the week, starting point (code, name, and latitude/longitude), ending point (code, name, and latitude/longitude), and member/casual rider.
+   I downloaded all the 15 historical data in the format of CSV repersenting each month , 2020/4 -2021/05, from the company cloud server. All the historical data is in comma-delimited format with 15 columns, ride ID #, ride type, start/end time, ride length (in minutes), day of the week, starting point (code, name, and latitude/longitude), ending point (code, name, and latitude/longitude), and member/casual rider. 
+   There are multiple null values across each file and there will be further inspection on these null values and how to minimize them.
 
 
    Because this data is stored in the company server, I am going to assume the data is reliable.
@@ -28,8 +29,9 @@ I work as a junior data analyst in the marketing team of Cyclistic, a fictional 
 **Process** 
 
 
-Since it contains over 4 million rows of data, in this case, Excel will not be an ideal tool to use.  I will be using Bigquery to manipulate the data, a fully-managed, serverless data warehouse that enables scalable analysis over petabytes of data to combine and clean the data. 
-The code below merged all the data into one
+Since it contains over 4 million rows of data, in this case, Excel will not be an ideal tool to use. I will be using Bigquery to manipulate the data, a fully-managed, serverless data warehouse that enables scalable analysis over petabytes of data to combine and clean the data. 
+
+First I merge 12 datasets into a unionized dataset and creating day of the week for each trip and ride length columns later on.
 
 	with all_data as (
 	SELECT * EXCEPT (start_station_id, end_station_id) FROM `prefab-faculty-251001.bike_share.2020_04` 
