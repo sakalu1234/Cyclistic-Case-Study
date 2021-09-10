@@ -31,7 +31,7 @@ I work as a junior data analyst in the marketing team of Cyclistic, a fictional 
 
 Since it contains over 4 million rows of data, in this case, Excel will not be an ideal tool to use. I will be using Bigquery to manipulate the data, a fully-managed, serverless data warehouse that enables scalable analysis over petabytes of data to combine and clean the data. 
 
-First I merge 12 datasets into a unionized dataset and creating day of the week for each trip and ride length columns later on.
+First I merge 12 datasets into a unionized dataset.
 
 	with all_data as (
 	SELECT * EXCEPT (start_station_id, end_station_id) FROM `prefab-faculty-251001.bike_share.2020_04` 
@@ -85,7 +85,7 @@ First I merge 12 datasets into a unionized dataset and creating day of the week 
 
 
 
-****In some start_station_name and end_station_name contain irregular symbol and text, so I decided to remove it and I also to modified the latitude and longitude coordinates to match each stations. 
+****In some start_station_name and end_station_name contain irregular symbol and text, so I decided to remove it and I also modified the latitude and longitude coordinates to match each stations. 
 
 
 
@@ -113,7 +113,8 @@ First I merge 12 datasets into a unionized dataset and creating day of the week 
 
 
 
-****Then I calculated the ride length time and the day of the week. By knowing how long both parties ride can help us to know our them better.
+****Then I calculated the ride length time and the day of the week. 
+.
 
 	agg_data as (
 	SELECT
@@ -143,7 +144,7 @@ First I merge 12 datasets into a unionized dataset and creating day of the week 
 **Analyze**
 
 After I rechecked several times on the cleaning process, I finally started to analyze the data to identify reasons for the different behaviors of casual riders and member riders.
-Since Bigquery does not provide any data visualization, I decided to use Tableau software to visualize the data.
+In this step,I decided to use Tableau to analyze the data.
 
 1. We can see from here that casual riders prefer to ride longer than member riders. For both riders, the peak occurs on Saturday and Sunday.
  
