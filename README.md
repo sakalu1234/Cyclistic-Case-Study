@@ -83,9 +83,36 @@ First I merge 12 datasets into a unionized dataset.
 	DELETE FROM `prefab-faculty-251001.bike_share.2021_04` WHERE end_time < start_time;
 	DELETE FROM `prefab-faculty-251001.bike_share.2021_05` WHERE end_time < start_time;	
 
+**** I calculated the ride length time and the day of the week. 
 
 
-****In some start_station_name and end_station_name contain irregular symbol and text, so I decided to remove it and I also modified the latitude and longitude coordinates to match each stations. 
+	agg_data as (
+	SELECT
+	*,
+	TIMESTAMP_DIFF(ended_at, started_at, MINUTE) AS ride_length_minute, #calculat the time between end and start, and I have been used another table to delete rows where start_time > end_time.
+	    CASE
+	      WHEN EXTRACT(DAYOFWEEK FROM started_at) = 1 THEN 'Sunday'    
+	      WHEN EXTRACT(DAYOFWEEK
+	    FROM
+	      started_at) = 2 THEN 'Monday'
+	      WHEN EXTRACT(DAYOFWEEK FROM started_at) = 3 THEN 'Tuesday'
+	      WHEN EXTRACT(DAYOFWEEK
+	    FROM
+	      started_at) = 4 THEN 'Wednesday'
+	      WHEN EXTRACT(DAYOFWEEK FROM started_at) = 5 THEN 'Thursday'
+	      WHEN EXTRACT(DAYOFWEEK
+	    FROM
+	      started_at) = 6 THEN 'Friday'
+	    ELSE
+	    'Saturday'
+	  END
+	    AS day_of_week
+	  FROM
+	    all_data),
+	    
+	    
+
+**** some start_station_name and end_station_name contain irregular symbol and text, so I decided to remove it and I also modified the latitude and longitude coordinates to match each stations. 
 
 
 
@@ -113,32 +140,7 @@ First I merge 12 datasets into a unionized dataset.
 
 
 
-****Then I calculated the ride length time and the day of the week. 
-.
 
-	agg_data as (
-	SELECT
-	*,
-	TIMESTAMP_DIFF(ended_at, started_at, MINUTE) AS ride_length_minute, #calculat the time between end and start, and I have been used another table to delete rows where start_time > end_time.
-	    CASE
-	      WHEN EXTRACT(DAYOFWEEK FROM started_at) = 1 THEN 'Sunday'    
-	      WHEN EXTRACT(DAYOFWEEK
-	    FROM
-	      started_at) = 2 THEN 'Monday'
-	      WHEN EXTRACT(DAYOFWEEK FROM started_at) = 3 THEN 'Tuesday'
-	      WHEN EXTRACT(DAYOFWEEK
-	    FROM
-	      started_at) = 4 THEN 'Wednesday'
-	      WHEN EXTRACT(DAYOFWEEK FROM started_at) = 5 THEN 'Thursday'
-	      WHEN EXTRACT(DAYOFWEEK
-	    FROM
-	      started_at) = 6 THEN 'Friday'
-	    ELSE
-	    'Saturday'
-	  END
-	    AS day_of_week
-	  FROM
-	    all_data),
 
 ****************************************************************************************************************
 **Analyze**
