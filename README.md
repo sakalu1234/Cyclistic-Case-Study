@@ -65,7 +65,7 @@ First I merge 12 datasets into a unionized dataset.
 **Cleaning**
 
 
-****Some of the data is wrong, like the end_time is small than the start_time. So I decided to delete the data.
+****Some of the data is wrong, like the end_time is eariler than the start_time. So I decided to delete the data.
 
 
 	DELETE FROM `prefab-faculty-251001.bike_share.2020_04` WHERE end_time < start_time;
