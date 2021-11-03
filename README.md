@@ -158,16 +158,13 @@ In this step,I decided to use Tableau to analyze the data.
  
 Figure 2 and Figure 3 confirm the theory. Casual riders are concentrated on the North Side community area of Chicago but member riders are more scattered throughout the city.
 
-![casual](https://user-images.githubusercontent.com/63176613/139969623-bfadb913-db77-45ad-9d2b-29923768f1a1.png)
-
-**Figure 2 Casual Riders on workday
 
 
+![Member](https://user-images.githubusercontent.com/63176613/139970534-5e3792e5-de91-4c5a-b2f5-90a84ba26e60.png)
 
-![member](https://user-images.githubusercontent.com/63176613/139969634-a7815003-2417-4f62-b364-a061c41f007b.png)
+![Cas](https://user-images.githubusercontent.com/63176613/139970541-4e04c85f-1be4-4fb6-983d-cee60bdc275b.png)
 
 
-**Figure 3 Member Riders on workday
  
  
  
