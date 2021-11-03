@@ -160,9 +160,9 @@ Figure 2 and Figure 3 confirm the theory. Casual riders are concentrated on the 
 
 
 
-![Member](https://user-images.githubusercontent.com/63176613/139970534-5e3792e5-de91-4c5a-b2f5-90a84ba26e60.png)
 
 ![Cas](https://user-images.githubusercontent.com/63176613/139970541-4e04c85f-1be4-4fb6-983d-cee60bdc275b.png)
+![Member](https://user-images.githubusercontent.com/63176613/139970534-5e3792e5-de91-4c5a-b2f5-90a84ba26e60.png)
 
 
  
